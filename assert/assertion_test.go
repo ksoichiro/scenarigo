@@ -34,6 +34,8 @@ deps:
 	assertion := Build(in)
 
 	type info struct {
+		deps int // should not be treated as key "deps"
+
 		Deps []map[string]interface{} `yaml:"deps"`
 	}
 

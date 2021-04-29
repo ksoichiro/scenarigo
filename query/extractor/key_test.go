@@ -9,6 +9,8 @@ import (
 )
 
 type testStruct struct {
+	a string // should not be treated as key "a"
+
 	A      string
 	B      string       `yaml:"2"`
 	Inline inlineStruct `yaml:",inline"`
