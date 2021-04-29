@@ -54,6 +54,11 @@ func (e *keyExtractor) extract(v reflect.Value) (reflect.Value, bool) {
 		default:
 			inlines := []int{}
 			for i := 0; i < v.Type().NumField(); i++ {
+				if !v.Field(i).CanInterface() {
+					// Ignore unexported fields to avoid conflict with
+					// other exported fields and "yaml" struct field tags.
+					continue
+				}
 				field := v.Type().FieldByIndex([]int{i})
 				name := strings.ToLower(field.Name)
 				if tag, ok := field.Tag.Lookup("yaml"); ok {
